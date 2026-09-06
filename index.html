@@ -5,24 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>KNSPACE Internal Web Application</title>
   <meta name="description" content="KNSPACE Internal Web Application Portal" />
-  
-  <!-- Inter Font for Clean Modern Typography -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --primary-color: #0f172a; /* Deep Slate */
-      --accent-color: #2563eb;  /* Vivid Blue */
-      --bg-color: #f8fafc;      /* Off-white background */
-      --card-bg: #ffffff;
-      --text-main: #1e293b;
-      --text-muted: #64748b;
-      --border-color: #e2e8f0;
-      --header-height: 60px;
-    }
-
     * {
       box-sizing: border-box;
       margin: 0;
@@ -32,100 +16,15 @@
     body, html {
       height: 100%;
       width: 100%;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      overflow: hidden; /* Prevents double scrolling */
+      overflow: hidden;
+      background-color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
-    /* Container Layout */
     .app-wrapper {
-      display: flex;
-      flex-direction: column;
       height: 100vh;
       width: 100vw;
-    }
-
-    /* Professional Top Navigation Bar */
-    .navbar {
-      height: var(--header-height);
-      background-color: var(--card-bg);
-      border-bottom: 1px solid var(--border-color);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 1.25rem;
-      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-      z-index: 10;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .brand-badge {
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
-      color: #fff;
-      font-weight: 700;
-      font-size: 0.85rem;
-      padding: 0.35rem 0.65rem;
-      border-radius: 6px;
-      letter-spacing: 0.5px;
-    }
-
-    .brand-title {
-      font-weight: 600;
-      font-size: 1.05rem;
-      color: var(--primary-color);
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    /* Action Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.5rem 0.85rem;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text-main);
-      background-color: #f1f5f9;
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-
-    .btn:hover {
-      background-color: #e2e8f0;
-      color: var(--primary-color);
-    }
-
-    .btn-primary {
-      background-color: var(--accent-color);
-      color: #ffffff;
-      border-color: var(--accent-color);
-    }
-
-    .btn-primary:hover {
-      background-color: #1d4ed8;
-      color: #ffffff;
-    }
-
-    /* Iframe Container */
-    .iframe-container {
       position: relative;
-      flex: 1;
-      width: 100%;
-      background-color: #ffffff;
     }
 
     iframe {
@@ -142,7 +41,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: var(--card-bg);
+      background-color: #ffffff;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -161,14 +60,14 @@
       width: 40px;
       height: 40px;
       border: 3px solid #e2e8f0;
-      border-top: 3px solid var(--accent-color);
+      border-top: 3px solid #2563eb;
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
     }
 
     .loading-text {
       font-size: 0.9rem;
-      color: var(--text-muted);
+      color: #64748b;
       font-weight: 500;
     }
 
@@ -176,94 +75,33 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-
-    /* Responsive adjustments for mobile screens */
-    @media (max-width: 640px) {
-      .navbar {
-        padding: 0 0.85rem;
-      }
-      .brand-title {
-        font-size: 0.9rem;
-      }
-      .btn-text {
-        display: none; /* Hide button text on narrow screens, keep icons */
-      }
-      .btn {
-        padding: 0.5rem;
-      }
-    }
   </style>
 </head>
 <body>
 
   <div class="app-wrapper">
-    <!-- Header / Nav Bar -->
-    <header class="navbar">
-      <div class="brand">
-        <span class="brand-badge">KNSPACE</span>
-        <span class="brand-title">Internal Web Portal</span>
-      </div>
+    <!-- Loading Overlay -->
+    <div id="loading" class="loading-overlay">
+      <div class="spinner"></div>
+      <div class="loading-text">Loading KNSPACE Portal...</div>
+    </div>
 
-      <div class="nav-actions">
-        <!-- Reload Button -->
-        <button class="btn" onclick="reloadIframe()" title="Reload Application">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-          </svg>
-          <span class="btn-text">Refresh</span>
-        </button>
-
-        <!-- Open in New Tab (Crucial for Google Auth issues on Mobile) -->
-        <a 
-          href="https://script.google.com/macros/s/AKfycbwHwP6hTcNYeQCr5eUeakq3zrISM81Ud7avbIcfviJWhTNPr50Dttdt-rUZtirlgHor/exec" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          class="btn btn-primary"
-          title="Open in Full Window"
-        >
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-          </svg>
-          <span class="btn-text">Open App</span>
-        </a>
-      </div>
-    </header>
-
-    <!-- Main Content Area with Embedded App -->
-    <main class="iframe-container">
-      <!-- Loading Spinner -->
-      <div id="loading" class="loading-overlay">
-        <div class="spinner"></div>
-        <div class="loading-text">Loading KNSPACE Portal...</div>
-      </div>
-
-      <!-- Google Apps Script Embedded iFrame -->
-      <iframe 
-        id="appFrame"
-        src="https://script.google.com/macros/s/AKfycbwHwP6hTcNYeQCr5eUeakq3zrISM81Ud7avbIcfviJWhTNPr50Dttdt-rUZtirlgHor/exec"
-        allow="geolocation; microphone; camera; clipboard-write;"
-        sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-        onload="hideLoader()"
-      ></iframe>
-    </main>
+    <!-- Fullscreen Google Apps Script iFrame -->
+    <iframe 
+      id="appFrame"
+      src="https://script.google.com/macros/s/AKfycbwHwP6hTcNYeQCr5eUeakq3zrISM81Ud7avbIcfviJWhTNPr50Dttdt-rUZtirlgHor/exec"
+      allow="geolocation; microphone; camera; clipboard-write;"
+      sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+      onload="hideLoader()"
+    ></iframe>
   </div>
 
   <script>
-    // Hide loading screen once iframe finishes loading
     function hideLoader() {
       const loader = document.getElementById('loading');
       if (loader) {
         loader.classList.add('hidden');
       }
-    }
-
-    // Function to reload the Google Script web app
-    function reloadIframe() {
-      const loader = document.getElementById('loading');
-      const iframe = document.getElementById('appFrame');
-      
-      if (loader) loader.classList.remove('hidden');
-      iframe.src = iframe.src; // Re-trigger load
     }
   </script>
 
